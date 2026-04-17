@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import api from '../services/api'
-import { useSocket } from './useSocket'
+import { useRealtime } from './useRealtime'
 
 export function useConversas(usuario) {
   const [conversas, setConversas] = useState([])
@@ -75,8 +75,8 @@ export function useConversas(usuario) {
     return data
   }, [usuario])
 
-  // Socket.io — atualiza estado em tempo real
-  useSocket({
+  // Supabase Realtime — atualiza estado em tempo real
+  useRealtime({
     nova_mensagem: ({ conversa_id, mensagem }) => {
       if (conversaSelecionada?.id === conversa_id) {
         setMensagens((prev) => [...prev, mensagem])

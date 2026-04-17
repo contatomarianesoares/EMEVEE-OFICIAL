@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { useAuth } from '../hooks/useAuth'
-import { useSocket } from '../hooks/useSocket'
+import { useRealtime } from '../hooks/useRealtime'
 import api from '../services/api'
 import MetricCard from '../components/MetricCard'
 import StatusAgente from '../components/StatusAgente'
@@ -35,7 +35,7 @@ export default function GestoraDashboard() {
   useEffect(() => { carregar() }, [])
 
   // Atualiza métricas em tempo real
-  useSocket({
+  useRealtime({
     nova_conversa: () => carregar(),
     conversa_atualizada: () => setResumo((p) => p ? { ...p } : p),
   })

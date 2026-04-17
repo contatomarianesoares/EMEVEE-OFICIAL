@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import { useSocket } from '../hooks/useSocket'
+import { useRealtime } from '../hooks/useRealtime'
 import api from '../services/api'
 
 // ── Aba Agentes ──────────────────────────────────────────────
@@ -123,8 +123,8 @@ function AbaInstancias() {
 
   useEffect(() => { api.get('/instancias').then(({ data }) => setInstancias(data.instancias)) }, [])
 
-  // Escuta QR Code chegando em tempo real via Socket.io
-  useSocket({
+  // Escuta QR Code chegando em tempo real via Supabase Realtime
+  useRealtime({
     instancia_status: ({ instancia_id, status }) => {
       setInstancias((p) => p.map((i) => i.id === instancia_id ? { ...i, status } : i))
       // Se conectou, fecha o modal de QR

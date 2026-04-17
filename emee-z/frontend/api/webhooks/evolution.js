@@ -8,6 +8,17 @@ export default async function handler(req, res) {
     const payload = req.body;
     const { event, instance, data } = payload;
 
+    // Evento de conexão atualizada
+    if (event === 'connection.update' && data) {
+      const status = data.state === 'open' ? 'conectado' : 'desconectado';
+      await query('UPDATE instancias SET status = $1 WHERE evolution_instance_id = $2', [status, instance]);
+    }
+
+    // Evento de QR Code atualizado
+    if (event === 'qrcode.updated' && data?.qrcode) {
+      await query('UPDATE instancias SET ultimo_qr_code = $1 WHERE evolution_instance_id = $2', [data.qrcode, instance]);
+    }
+
     // Evento de mensagem recebida
     if (event === 'messages.upsert' && data?.messages) {
       for (const msg of data.messages) {
