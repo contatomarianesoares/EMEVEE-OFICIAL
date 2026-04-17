@@ -1,18 +1,18 @@
 # EMEVEE OFICIAL — STATE.md (Handover para próxima IA)
 
-**Última atualização**: 17/04/2026 — Claude Opus 4.7
-**Status geral**: 🚀 MIGRAÇÃO PARA CLOUD | ✅ Schema criado no Supabase | ⏳ Render backend pendente
+**Última atualização**: 17/04/2026 — Antigravity AI
+**Status geral**: 🚀 MIGRAÇÃO VERCEL CONCLUÍDA | ✅ Serverless Functions Ativas | ✅ Supabase Realtime Implementado | 🧪 Login em testes
 
 ---
 
 ## 🚀 MIGRAÇÃO CLOUD — 17/04/2026
 
 **O que foi feito hoje:**
-1. ✅ Criado schema no Supabase `EMEVEE-Z` (dysnlzaqnwpmmbqundqd) — tabelas de backend prontas
-2. ✅ Frontend no Vercel em `jurialvo-crm-new.vercel.app` com env vars Supabase
-3. ✅ Usuário de teste criado: `contatomarianesoares@gmail.com` / `Teste123!`
-4. ✅ `render.yaml` e guias de setup criados
-5. ⏳ **PRÓXIMO**: Deploy backend no Render (aguarda ação manual no dashboard Render)
+1. ✅ **Migração Serverless**: Backend Node.js migrado para Vercel Serverless Functions (pastas `/frontend/api`).
+2. ✅ **Real-time Nativo**: Socket.io substituído por **Supabase Realtime** (Hook `useRealtime.js`).
+3. ✅ **Banco de Dados**: Migrado para Supabase (Id: `dysnlzaqnwpmmbqundqd`). Coluna `ultimo_qr_code` adicionada.
+4. ✅ **Frontend**: Refatorado para usar caminhos relativos `/api` e baseURL hardcoded.
+5. ⏳ **PRÓXIMO**: Resolver falha de login (bcrypt/db connection) e testar fluxo de instâncias.
 
 **Mudança de projeto:**
 - Repositório GitHub: `contatomarianesoares/EMEVEE-OFICIAL` (token atualizado)
@@ -94,28 +94,16 @@ docker compose up -d               # subir tudo
 
 ## 🔐 CREDENCIAIS
 
-### Aplicação (login no frontend — sistema de auth do PRÓPRIO backend, NÃO é Supabase Auth)
-- **URL**: http://152.67.53.192
-- **Email**: contatomarianesoares@gmail.com
-- **Senha**: admin123
-- **Papel**: gestora
+### Vercel (Hospedagem atual)
+- **URL**: [https://jurialvo-crm-new.vercel.app](https://jurialvo-crm-new.vercel.app)
+- **Root Directory**: `emee-z/frontend`
 
-> ⚠️ Importante: o EMEVEE-Z usa autenticação JWT própria (backend Node.js), NÃO usa Supabase Auth.
-> O Supabase aqui é usado APENAS para integração de dados com o JURIALVO-CRM.
-> São sistemas de autenticação completamente separados.
-
-### PostgreSQL (banco interno do EMEVEE-Z, no Docker do servidor Oracle)
-- **POSTGRES_USER**: emeez
-- **POSTGRES_PASSWORD**: 99b35f38e5a0b15d7dcac5a12f99d93d
-- **POSTGRES_DB**: emeez_db
-
-### Evolution API
-- **URL interna**: http://evolution:8080 (dentro do Docker)
-- **URL externa**: http://152.67.53.192:8080
-- **EVOLUTION_API_KEY**: ver `~/emee-z/.env` no servidor
+### Supabase (Banco de Dados Principal)
+- **Projeto**: `EMEVEE-Z` (dysnlzaqnwpmmbqundqd)
+- **DATABASE_URL**: (Ver Vercel Settings)
 
 ### JWT
-- **JWT_SECRET**: ver `~/emee-z/.env` no servidor
+- **JWT_SECRET**: `096514ffff6f963ea655fae4b70046b9723eb4a1ae808ee7f182d88c0adc537b`
 
 ---
 
@@ -224,41 +212,13 @@ O tema foi migrado de **dark** (navy profundo) para **light** em 16/04/2026.
 
 ---
 
-## 🚀 PROCESSO DE DEPLOY (OBRIGATÓRIO — Oracle Free Tier)
+## 🚀 PROCESSO DE DEPLOY (Vercel)
 
-⚠️ **NUNCA rodar `npm run build` dentro do Docker no servidor** — 1 OCPU satura, SSH cai, backend morre.
+O projeto agora é hospedado inteiramente na Vercel (Frontend e Serverless Backend).
 
-### Deploy do Frontend (quando mudar código React):
-```bash
-# 1. Build local no Mac (2-3 segundos)
-cd /Users/marianesoares/Desktop/EMEVEE-Z/emee-z/frontend
-npm run build
-
-# 2. Sync do dist pré-compilado para o servidor
-rsync -avz dist/ ubuntu@152.67.53.192:~/emee-z/frontend/dist/ -e "ssh -i ~/.ssh/id_rsa_emeez"
-rsync -avz Dockerfile.prebuilt nginx.conf ubuntu@152.67.53.192:~/emee-z/frontend/ -e "ssh -i ~/.ssh/id_rsa_emeez"
-
-# 3. Rebuild no servidor (apenas nginx + copy, ~10 segundos, não mata CPU)
-ssh -i ~/.ssh/id_rsa_emeez ubuntu@152.67.53.192 \
-  'cd ~/emee-z && docker compose build frontend && docker compose up -d frontend'
-```
-
-### Deploy do Backend (quando mudar código Node.js):
-```bash
-rsync -avz --exclude='node_modules' --exclude='.env' \
-  /Users/marianesoares/Desktop/EMEVEE-Z/emee-z/backend/src/ \
-  ubuntu@152.67.53.192:~/emee-z/backend/src/ \
-  -e "ssh -i ~/.ssh/id_rsa_emeez"
-
-ssh -i ~/.ssh/id_rsa_emeez ubuntu@152.67.53.192 \
-  'cd ~/emee-z && docker compose build backend && docker compose up -d backend'
-```
-
-### Se o servidor travar:
-1. Checar: `curl http://152.67.53.192/`
-2. Se responder = nginx vivo, SSH caiu por carga → aguardar ou rebootar
-3. Reboot: Oracle Cloud → Compute → Instances → emee-z → Reboot
-4. Após reboot, containers sobem automaticamente (`restart: always`)
+1. **Alterações locais**: `git add .` -> `git commit` -> `git push origin main`.
+2. **Deploy**: Automático pela Vercel ao detectar push no branch `main`.
+3. **Logs**: Acompanhar via Vercel Dashboard em *Logs* > *Serverless Functions*.
 
 ---
 
@@ -267,15 +227,12 @@ ssh -i ~/.ssh/id_rsa_emeez ubuntu@152.67.53.192 \
 ```
 1. Usuário clica "Ver QR Code"
 2. Frontend → GET /api/instancias/:id/qrcode
-3. Backend → Evolution API: GET /instance/connect/:name (dispara reconexão)
-4. Backend retorna: { qrcode: null, aguardando: true }
-5. Frontend abre modal com spinner
-6. Evolution → webhook POST /webhooks/evolution (event: QRCODE_UPDATED)
-7. Backend → salva QR no qrCache (TTL 60s) → emite Socket.io 'qrcode_atualizado'
-8. Frontend recebe Socket.io → exibe QR na modal
-9. QR expira a cada ~60s → Evolution envia novo → frontend atualiza (NORMAL)
-10. Usuário escaneia → Evolution envia CONNECTION_UPDATE state=open
-11. Backend → status='conectado' → Socket.io 'instancia_status' → modal fecha
+3. Serverless API → Evolution: GET /instance/connect/:name
+4. Evolution → retorna status ou dispara Webhook
+5. Evolution → Webhook POST /api/webhooks/evolution (QRCODE_UPDATED)
+6. Webhook → Salva no Supabase (coluna ultimo_qr_code)
+7. Frontend → Escuta mudança via Supabase Realtime (Hook useRealtime)
+8. Frontend → Exibe QR Code na modal
 ```
 
 ---
@@ -335,10 +292,12 @@ POST /webhooks/evolution      ← recebe QRCODE, mensagens, connection updates
 
 ## 📌 PENDÊNCIAS / PRÓXIMOS PASSOS
 
-### URGENTE — Supabase
-- [ ] Criar novo projeto `jurialvo-suite` e migrar tabelas (coordenar com JURIALVO-CRM)
-- [ ] Atualizar `emee-z/frontend/.env.local` com novo Supabase
-- [ ] Build + deploy novo frontend no servidor Oracle
+### URGENTE — Login
+- [ ] Debugar falha de login (401/500) após migração serverless.
+- [ ] Validar conexão do middleware com o Supabase.
+
+### Funcionalidade
+- [ ] Testar fluxo completo WhatsApp via Serverless.
 
 ### Interface (usuária pediu)
 - [ ] Deixar o frontend mais claro (tema atual está light, mas usuária quer ainda mais claro/limpo)

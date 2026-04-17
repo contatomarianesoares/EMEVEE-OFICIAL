@@ -2,7 +2,7 @@ const { query } = require('../lib/db');
 const { autenticar } = require('../lib/middleware');
 const { v4: uuidv4 } = require('uuid');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const auth = await autenticar(req);
     if (auth.erro) return res.status(auth.status).json({ erro: auth.erro });

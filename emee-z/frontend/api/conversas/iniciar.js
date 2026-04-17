@@ -2,7 +2,7 @@ const { query } = require('../lib/db');
 const { autenticar } = require('../lib/middleware');
 const { v4: uuidv4 } = require('uuid');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ erro: 'Método não permitido' });
   try {
     const auth = await autenticar(req);

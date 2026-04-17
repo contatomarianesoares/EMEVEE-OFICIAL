@@ -4,7 +4,7 @@ const { query } = require('../lib/db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ erro: 'Método não permitido' });
   try {
     const { email, senha } = req.body;
@@ -24,4 +24,4 @@ export default async function handler(req, res) {
     console.error('[API] Erro login:', err.message);
     return res.status(500).json({ erro: 'Erro interno' });
   }
-}
+};

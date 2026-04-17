@@ -1,7 +1,7 @@
 const { query } = require('../lib/db');
 const { autenticar } = require('../lib/middleware');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'PATCH') return res.status(405).json({ erro: 'Método não permitido' });
   try {
     const auth = await autenticar(req);

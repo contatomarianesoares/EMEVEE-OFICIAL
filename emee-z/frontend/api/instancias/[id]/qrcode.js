@@ -5,7 +5,7 @@ const axios = require('axios');
 const EVOLUTION_URL = process.env.EVOLUTION_API_URL || 'http://localhost:8080';
 const EVOLUTION_KEY = process.env.EVOLUTION_API_KEY || '';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ erro: 'Método não permitido' });
 
   try {
