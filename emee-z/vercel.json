@@ -9,16 +9,10 @@
     "NODE_ENV": "production"
   },
   "functions": {
-    "frontend/api/**/*.js": {
+    "api/**/*.js": {
       "runtime": "nodejs20.x",
       "memory": 1024,
       "maxDuration": 60
     }
-  },
-  "routes": [
-    {
-      "src": "/api/(?<path>.*)",
-      "dest": "frontend/api/$path"
-    }
-  ]
+  }
 }
