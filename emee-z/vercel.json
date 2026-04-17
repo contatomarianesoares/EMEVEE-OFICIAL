@@ -1,9 +1,12 @@
 {
-  "name": "jurialvo-crm-new",
+  "projectSettings": {
+    "nodeVersion": "20.x"
+  },
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
   "public": "frontend/public",
   "cleanUrls": true,
+  "trailingSlash": false,
   "env": {
     "DATABASE_URL": "@DATABASE_URL",
     "JWT_SECRET": "@JWT_SECRET",
@@ -16,5 +19,15 @@
       "memory": 1024,
       "maxDuration": 60
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
