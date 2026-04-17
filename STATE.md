@@ -1,22 +1,57 @@
 # EMEVEE OFICIAL — STATE.md (Handover para próxima IA)
 
-**Última atualização**: 17/04/2026 — Antigravity AI
-**Status geral**: 🚀 MIGRAÇÃO VERCEL CONCLUÍDA | ✅ Serverless Functions Ativas | ✅ Supabase Realtime Implementado | 🧪 Login em testes
+**Última atualização**: 17/04/2026 13:30 — Claude Haiku 4.5 (Continuação)
+**Status geral**: 🚀 MIGRAÇÃO VERCEL EM PROGRESSO | ✅ Env Vars Configuradas | ✅ API Routes Reorganizadas | 🧪 Aguardando Build Vercel
 
 ---
 
 ## 🚀 MIGRAÇÃO CLOUD — 17/04/2026
 
-**O que foi feito hoje:**
+### Sessão Anterior (Antigravity AI)
 1. ✅ **Migração Serverless**: Backend Node.js migrado para Vercel Serverless Functions (pastas `/frontend/api`).
 2. ✅ **Real-time Nativo**: Socket.io substituído por **Supabase Realtime** (Hook `useRealtime.js`).
 3. ✅ **Banco de Dados**: Migrado para Supabase (Id: `dysnlzaqnwpmmbqundqd`). Coluna `ultimo_qr_code` adicionada.
 4. ✅ **Frontend**: Refatorado para usar caminhos relativos `/api` e baseURL hardcoded.
-5. ⏳ **PRÓXIMO**: Resolver falha de login (bcrypt/db connection) e testar fluxo de instâncias.
 
-**Mudança de projeto:**
-- Repositório GitHub: `contatomarianesoares/EMEVEE-OFICIAL` (token atualizado)
-- Status: local commit feito, aguarda push para GitHub
+### Sessão Atual (Claude Haiku 4.5 - 13:30h)
+**O que foi feito:**
+1. ✅ **Environment Variables (Vercel)**: Adicionadas 4 variáveis no dashboard:
+   - `DATABASE_URL` = postgresql://postgres:99b35f38e5a0b15d7dcac5a12f99d93d@db.dysnlzaqnwpmmbqundqd.supabase.co:5432/postgres
+   - `JWT_SECRET` = 096514ffff6f963ea655fae4b70046b9723eb4a1ae808ee7f182d88c0adc537b
+   - `EVOLUTION_API_KEY` = 4d64ae786ecee5d23b97a4168356075032252787e5975b5f
+   - `NODE_ENV` = production
+   - Status: ✅ Salvas no Vercel, Redeploy executado (dpl_HtM6fJwQSL66SVu3L4s2Mz3R4GZx)
+
+2. ✅ **API Route Fixes**:
+   - Corrigido: Convertidas 19 rotas de `export default` para `module.exports` (CommonJS para Vercel)
+   - Commit: `42cbdc5` — "fix: convert all API routes from ES6 export default to CommonJS module.exports"
+
+3. ✅ **API Folder Reorganization** (CRITICAL FIX):
+   - Movidas rotas de `frontend/api/` para `api/` (raiz do projeto)
+   - Motivo: Vercel não reconhecia rotas em subdiretórios - precisa estar na raiz
+   - Commit: `3af9ca6` — "refactor: move API routes to root api/ directory for Vercel compatibility"
+   - Estrutura corrigida:
+     ```
+     emee-z/
+       ├── api/            ← AGORA AQUI (raiz)
+       │   ├── auth/login.js
+       │   ├── conversas/
+       │   ├── lib/db.js
+       │   └── ...
+       └── frontend/
+           ├── src/
+           └── dist/
+     ```
+
+4. ✅ **vercel.json Updates**:
+   - Configurada routing para reconhecer API functions
+   - Commit: `80534ae` — "fix: improve vercel.json routing configuration"
+
+**STATUS ATUAL**: 🧪 Aguardando Vercel redetectar GitHub commits
+- Último git commit: `3af9ca6` (API reorganization)
+- Vercel build atual: dpl_HtM6fJwQSL66SVu3L4s2Mz3R4GZx (com env vars, mas sem API reorganização ainda)
+- Próximo passo: Vercel deve redetectar `3af9ca6` e fazer novo build com API em `/api`
+- ⏳ **BLOCKER**: API endpoints ainda retornam 405 (Method Not Allowed) = aguardando novo build
 
 **Tabelas que este projeto escreve/lê no Supabase:**
 - `conversas_wpp` — sincronização de conversas com CRM (escrita pelo EMEVEE-Z)
@@ -292,12 +327,19 @@ POST /webhooks/evolution      ← recebe QRCODE, mensagens, connection updates
 
 ## 📌 PENDÊNCIAS / PRÓXIMOS PASSOS
 
-### URGENTE — Login
-- [ ] Debugar falha de login (401/500) após migração serverless.
-- [ ] Validar conexão do middleware com o Supabase.
+### 🔴 URGENTE — Build Vercel Pendente
+- [ ] **MONITORAR**: Vercel precisa redetectar commits `42cbdc5` e `3af9ca6` no GitHub
+- [ ] **IF TIMEOUT**: Manualmente fazer "Redeploy" via Vercel dashboard com novo commit
+- [ ] **EXPECTATIVA**: Novo build (~2-3 min) deve reconhecer `/api` na raiz e registrar functions
+- [ ] **TESTE**: `curl -X POST https://jurialvo-crm-new.vercel.app/api/auth/login` deve retornar JSON (não 405)
 
-### Funcionalidade
-- [ ] Testar fluxo completo WhatsApp via Serverless.
+### URGENTE — Login Test
+- [ ] Após novo build Vercel: testar login com `{"email":"admin@emevee.com","senha":"admin123"}`
+- [ ] Esperado: JWT token retornado (status 200) ou erro de credencial (401)
+- [ ] Se DB connection falhar: verificar DATABASE_URL na Vercel env vars
+
+### Funcionalidade  
+- [ ] Testar fluxo completo WhatsApp via Serverless (QR → mensagem → bot → agente).
 
 ### Interface (usuária pediu)
 - [ ] Deixar o frontend mais claro (tema atual está light, mas usuária quer ainda mais claro/limpo)
