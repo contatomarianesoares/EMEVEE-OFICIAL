@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jurialvo-crm",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "crm"],
+      "port": 5175
+    }
+  ]
+}

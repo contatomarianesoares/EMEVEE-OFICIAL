@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JuriAlvo — Brand Identity Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ja-navy:#0A0E1A;--ja-navy-mid:#111827;--ja-navy-card:#161D2E;--ja-navy-border:#1E2A42;
+  --ja-teal:#00C6A2;--ja-teal-dim:#00957A;--ja-teal-glow:rgba(0,198,162,0.15);--ja-teal-glow2:rgba(0,198,162,0.06);
+  --ja-amber:#F59E0B;--ja-amber-dim:#D97706;--ja-white:#F0F4FF;--ja-white-muted:#8A9BBF;--ja-white-faint:#3A4B6B;
+  --ja-red:#EF4444;--ja-blue-accent:#3B82F6;
+  --font-display:'Space Grotesk',sans-serif;--font-mono:'Space Mono',monospace;
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;
+  --space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-display);background:var(--ja-navy);color:var(--ja-white);min-height:100vh;line-height:1.6}
+.page{max-width:1100px;margin:0 auto;padding:var(--space-12) var(--space-6)}
+.section{margin-bottom:var(--space-16)}
+.section-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ja-teal);margin-bottom:var(--space-3)}
+.section-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--ja-white);margin-bottom:var(--space-2);letter-spacing:-.02em}
+.section-desc{color:var(--ja-white-muted);font-size:.95rem;margin-bottom:var(--space-8);max-width:60ch}
+.divider{border:none;border-top:1px solid var(--ja-navy-border);margin-bottom:var(--space-16)}
+.kit-header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0 var(--space-12);border-bottom:1px solid var(--ja-navy-border);margin-bottom:var(--space-12);flex-wrap:wrap;gap:var(--space-4)}
+.kit-header-info p{color:var(--ja-white-muted);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.1em;margin-top:8px}
+.kit-version{font-family:var(--font-mono);font-size:11px;background:var(--ja-teal-glow);color:var(--ja-teal);border:1px solid rgba(0,198,162,.3);padding:var(--space-2) var(--space-4);border-radius:var(--r-sm);letter-spacing:.1em;text-transform:uppercase}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-4)}
+.logo-card{border-radius:var(--r-lg);padding:var(--space-8);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;gap:var(--space-4);position:relative;overflow:hidden}
+.logo-card-dark{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border)}
+.logo-card-light{background:#F0F4FF;border:1px solid #D1D9EE}
+.logo-card-teal{background:linear-gradient(135deg,#00957A 0%,#00C6A2 100%)}
+.logo-card-label{position:absolute;bottom:var(--space-3);left:var(--space-4);font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.5}
+.logo-card-dark .logo-card-label,.logo-card-teal .logo-card-label{color:var(--ja-white)}
+.logo-card-light .logo-card-label{color:var(--ja-navy)}
+.logo-svg{height:52px;width:auto}
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-3)}
+.swatch{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--ja-navy-border)}
+.swatch-color{height:80px;width:100%}
+.swatch-info{padding:var(--space-3);background:var(--ja-navy-card)}
+.swatch-name{font-weight:600;font-size:.82rem;color:var(--ja-white);margin-bottom:2px}
+.swatch-hex{font-family:var(--font-mono);font-size:.78rem;color:var(--ja-white-muted)}
+.swatch-role{font-size:.72rem;color:var(--ja-white-faint);margin-top:2px;line-height:1.3}
+.type-specimen{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border);border-radius:var(--r-lg);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-6)}
+.type-row{display:grid;grid-template-columns:160px 1fr;gap:var(--space-4);align-items:baseline;padding-bottom:var(--space-6);border-bottom:1px solid var(--ja-navy-border)}
+.type-row:last-child{border-bottom:none;padding-bottom:0}
+.type-meta{font-family:var(--font-mono);font-size:11px;color:var(--ja-white-faint);line-height:1.5}
+.type-meta strong{display:block;color:var(--ja-teal);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.t-display{font-size:clamp(2.5rem,6vw,4rem);font-weight:700;letter-spacing:-.04em;color:var(--ja-white);line-height:1.05}
+.t-h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.03em;color:var(--ja-white);line-height:1.1}
+.t-h2{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:600;letter-spacing:-.02em;color:var(--ja-white)}
+.t-h3{font-size:1.1rem;font-weight:600;color:var(--ja-white)}
+.t-body{font-size:1rem;font-weight:400;color:var(--ja-white-muted);max-width:60ch}
+.t-label{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ja-teal)}
+.t-mono{font-family:var(--font-mono);font-size:.9rem;color:var(--ja-amber)}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-4)}
+.rule-card{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border);border-radius:var(--r-lg);padding:var(--space-6)}
+.rule-card h4{font-size:.9rem;font-weight:600;color:var(--ja-white);margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-2)}
+.rule-card h4 .icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.icon-do{background:rgba(0,198,162,.15);color:var(--ja-teal)}
+.icon-dont{background:rgba(239,68,68,.15);color:var(--ja-red)}
+.rule-card ul{list-style:none}
+.rule-card ul li{font-size:.84rem;color:var(--ja-white-muted);padding:var(--space-2) 0;border-bottom:1px solid var(--ja-navy-border);line-height:1.5}
+.rule-card ul li:last-child{border-bottom:none}
+.rule-card.do ul li::before{content:"→ ";color:var(--ja-teal);font-family:var(--font-mono);font-size:10px}
+.rule-card.dont ul li::before{content:"✕ ";color:var(--ja-red);font-family:var(--font-mono);font-size:10px}
+.components-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-6)}
+.component-demo{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border);border-radius:var(--r-lg);padding:var(--space-6)}
+.component-demo-title{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ja-white-faint);margin-bottom:var(--space-4)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.btn{font-family:var(--font-display);font-size:.875rem;font-weight:600;padding:10px 20px;border-radius:var(--r-sm);border:none;cursor:pointer;letter-spacing:.01em;transition:all 180ms ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--ja-teal);color:var(--ja-navy)}.btn-primary:hover{background:var(--ja-teal-dim)}
+.btn-secondary{background:transparent;color:var(--ja-teal);border:1px solid rgba(0,198,162,.4)}.btn-secondary:hover{background:var(--ja-teal-glow)}
+.btn-ghost{background:transparent;color:var(--ja-white-muted);border:1px solid var(--ja-navy-border)}.btn-ghost:hover{color:var(--ja-white);border-color:var(--ja-white-faint)}
+.btn-amber{background:var(--ja-amber);color:var(--ja-navy)}
+.badge-row{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center}
+.badge{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;display:inline-flex;align-items:center;gap:5px}
+.badge::before{content:"●";font-size:8px}
+.badge-active{background:rgba(0,198,162,.12);color:var(--ja-teal);border:1px solid rgba(0,198,162,.25)}
+.badge-warning{background:rgba(245,158,11,.12);color:var(--ja-amber);border:1px solid rgba(245,158,11,.25)}
+.badge-error{background:rgba(239,68,68,.12);color:var(--ja-red);border:1px solid rgba(239,68,68,.25)}
+.badge-info{background:rgba(59,130,246,.12);color:var(--ja-blue-accent);border:1px solid rgba(59,130,246,.25)}
+.badge-neutral{background:rgba(138,155,191,.1);color:var(--ja-white-muted);border:1px solid rgba(138,155,191,.2)}
+.stat-card{background:var(--ja-navy);border:1px solid var(--ja-navy-border);border-radius:var(--r-md);padding:var(--space-4) var(--space-5)}
+.stat-card .stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ja-white-faint);margin-bottom:4px}
+.stat-card .stat-value{font-size:1.8rem;font-weight:700;color:var(--ja-white);letter-spacing:-.03em;line-height:1}
+.stat-card .stat-delta{font-family:var(--font-mono);font-size:11px;color:var(--ja-teal);margin-top:4px}
+.form-group{display:flex;flex-direction:column;gap:var(--space-2)}
+.form-label{font-size:.82rem;font-weight:500;color:var(--ja-white-muted)}
+.form-input{background:var(--ja-navy);border:1px solid var(--ja-navy-border);border-radius:var(--r-sm);padding:10px 14px;font-family:var(--font-display);font-size:.9rem;color:var(--ja-white);transition:border-color 180ms ease,box-shadow 180ms ease;width:100%}
+.form-input::placeholder{color:var(--ja-white-faint)}
+.form-input:focus{outline:none;border-color:var(--ja-teal);box-shadow:0 0 0 3px var(--ja-teal-glow)}
+.code-block{background:#060810;border:1px solid var(--ja-navy-border);border-radius:var(--r-md);padding:var(--space-6);overflow-x:auto}
+.code-block pre{font-family:var(--font-mono);font-size:.8rem;line-height:1.7;color:var(--ja-white-muted);white-space:pre-wrap;word-break:break-word}
+.c-key{color:var(--ja-teal)}.c-val{color:var(--ja-amber)}.c-str{color:#A5D6A7}.c-com{color:var(--ja-white-faint);font-style:italic}
+.download-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-4)}
+.dl-card{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border);border-radius:var(--r-lg);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-3)}
+.dl-card-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--ja-teal-glow2);border:1px solid rgba(0,198,162,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.dl-card-name{font-weight:600;font-size:.9rem;color:var(--ja-white)}
+.dl-card-desc{font-size:.8rem;color:var(--ja-white-muted);line-height:1.5;flex:1}
+.dl-btn{font-family:var(--font-display);font-size:.8rem;font-weight:600;padding:8px 14px;border-radius:var(--r-sm);background:var(--ja-teal-glow);color:var(--ja-teal);border:1px solid rgba(0,198,162,.3);cursor:pointer;text-align:center;letter-spacing:.02em;transition:all 180ms ease;display:block;width:100%}
+.dl-btn:hover{background:var(--ja-teal);color:var(--ja-navy)}
+.font-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+.font-card{background:var(--ja-navy-card);border:1px solid var(--ja-navy-border);border-radius:var(--r-lg);padding:var(--space-6)}
+.font-card .font-name{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ja-teal);margin-bottom:var(--space-3)}
+.font-card .font-preview-display{font-size:2.5rem;font-weight:700;letter-spacing:-.03em;color:var(--ja-white);line-height:1;margin-bottom:var(--space-2)}
+.font-card .font-preview-mono{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--ja-white);line-height:1;margin-bottom:var(--space-2)}
+.font-weights{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}
+.weight-chip{font-family:var(--font-mono);font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(138,155,191,.08);color:var(--ja-white-faint);letter-spacing:.08em}
+.font-card .font-use{font-size:.8rem;color:var(--ja-white-muted);margin-top:var(--space-3);line-height:1.5}
+@media(max-width:600px){.font-cards{grid-template-columns:1fr}.type-row{grid-template-columns:1fr}.type-meta{margin-bottom:var(--space-2)}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="kit-header">
+  <div class="kit-header-info">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" height="36" aria-label="JuriAlvo">
+      <circle cx="20" cy="20" r="16" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.4"/>
+      <circle cx="20" cy="20" r="10" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="20" cy="20" r="4" fill="#00C6A2"/>
+      <line x1="20" y1="2" x2="20" y2="10" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+      <line x1="20" y1="30" x2="20" y2="38" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+      <line x1="2" y1="20" x2="10" y2="20" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+      <line x1="30" y1="20" x2="38" y2="20" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+      <text x="50" y="26" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#F0F4FF" letter-spacing="-0.5">JURI</text>
+      <text x="100" y="26" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#00C6A2" letter-spacing="-0.5">ALVO</text>
+      <text x="153" y="15" font-family="Space Grotesk,sans-serif" font-size="9" fill="#8A9BBF">TM</text>
+    </svg>
+    <p>BRAND IDENTITY KIT · V1.0 · 2026</p>
+  </div>
+  <span class="kit-version">Identidade Visual</span>
+</div>
+
+<!-- 01 LOGOS -->
+<div class="section">
+  <div class="section-label">01 — Logo</div>
+  <div class="section-title">Variações do Logo</div>
+  <div class="section-desc">Use a versão adequada ao fundo. Nunca distorça, recolorie ou modifique o logo.</div>
+  <div class="logo-grid">
+    <div class="logo-card logo-card-dark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" class="logo-svg" aria-label="JuriAlvo logo dark">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.35"/>
+        <circle cx="24" cy="24" r="12" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.65"/>
+        <circle cx="24" cy="24" r="4.5" fill="#00C6A2"/>
+        <line x1="24" y1="2" x2="24" y2="11" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/>
+        <line x1="24" y1="37" x2="24" y2="46" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/>
+        <line x1="2" y1="24" x2="11" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/>
+        <line x1="37" y1="24" x2="46" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/>
+        <text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#F0F4FF" letter-spacing="-0.8">JURI</text>
+        <text x="118" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#00C6A2" letter-spacing="-0.8">ALVO</text>
+        <text x="178" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="#8A9BBF">TM</text>
+      </svg>
+      <div class="logo-card-label">Logo Dark — fundos escuros</div>
+    </div>
+    <div class="logo-card logo-card-light">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" class="logo-svg" aria-label="JuriAlvo logo light">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#00957A" stroke-width="1.5" opacity="0.35"/>
+        <circle cx="24" cy="24" r="12" fill="none" stroke="#00957A" stroke-width="1.5" opacity="0.65"/>
+        <circle cx="24" cy="24" r="4.5" fill="#00957A"/>
+        <line x1="24" y1="2" x2="24" y2="11" stroke="#00957A" stroke-width="1.5" opacity="0.55"/>
+        <line x1="24" y1="37" x2="24" y2="46" stroke="#00957A" stroke-width="1.5" opacity="0.55"/>
+        <line x1="2" y1="24" x2="11" y2="24" stroke="#00957A" stroke-width="1.5" opacity="0.55"/>
+        <line x1="37" y1="24" x2="46" y2="24" stroke="#00957A" stroke-width="1.5" opacity="0.55"/>
+        <text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#0A0E1A" letter-spacing="-0.8">JURI</text>
+        <text x="118" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#00957A" letter-spacing="-0.8">ALVO</text>
+        <text x="178" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="#6B7B9A">TM</text>
+      </svg>
+      <div class="logo-card-label">Logo Light — fundos claros</div>
+    </div>
+    <div class="logo-card logo-card-dark" style="min-height:140px">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height="64" aria-label="JuriAlvo icon">
+        <circle cx="24" cy="24" r="22" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="24" cy="24" r="14" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="24" cy="24" r="5" fill="#00C6A2"/>
+        <line x1="24" y1="1" x2="24" y2="10" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+        <line x1="24" y1="38" x2="24" y2="47" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+        <line x1="1" y1="24" x2="10" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+        <line x1="38" y1="24" x2="47" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+      <div class="logo-card-label">Ícone — avatar, favicon, app</div>
+    </div>
+    <div class="logo-card logo-card-teal" style="min-height:140px">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" class="logo-svg" aria-label="JuriAlvo logo white">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="24" cy="24" r="12" fill="none" stroke="white" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="24" cy="24" r="4.5" fill="white"/>
+        <line x1="24" y1="2" x2="24" y2="11" stroke="white" stroke-width="1.5" opacity="0.6"/>
+        <line x1="24" y1="37" x2="24" y2="46" stroke="white" stroke-width="1.5" opacity="0.6"/>
+        <line x1="2" y1="24" x2="11" y2="24" stroke="white" stroke-width="1.5" opacity="0.6"/>
+        <line x1="37" y1="24" x2="46" y2="24" stroke="white" stroke-width="1.5" opacity="0.6"/>
+        <text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="white" letter-spacing="-0.8">JURIALVO</text>
+        <text x="196" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">TM</text>
+      </svg>
+      <div class="logo-card-label">Monocromático — fundo colorido</div>
+    </div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- 02 CORES -->
+<div class="section">
+  <div class="section-label">02 — Cores</div>
+  <div class="section-title">Paleta de Cores</div>
+  <div class="section-desc">Copie os hex codes para usar no Claude Code, Figma ou qualquer ferramenta.</div>
+  <div class="palette-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#00C6A2"></div><div class="swatch-info"><div class="swatch-name">Teal Primary</div><div class="swatch-hex">#00C6A2</div><div class="swatch-role">CTAs, destaques, links ativos</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#00957A"></div><div class="swatch-info"><div class="swatch-name">Teal Hover</div><div class="swatch-hex">#00957A</div><div class="swatch-role">Estado hover/active dos CTAs</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F59E0B"></div><div class="swatch-info"><div class="swatch-name">Amber Alert</div><div class="swatch-hex">#F59E0B</div><div class="swatch-role">Alertas, status urgente, ROI</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0A0E1A"></div><div class="swatch-info"><div class="swatch-name">Navy Deep</div><div class="swatch-hex">#0A0E1A</div><div class="swatch-role">Background principal</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#111827"></div><div class="swatch-info"><div class="swatch-name">Navy Mid</div><div class="swatch-hex">#111827</div><div class="swatch-role">Surface / sections alternados</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#161D2E"></div><div class="swatch-info"><div class="swatch-name">Navy Card</div><div class="swatch-hex">#161D2E</div><div class="swatch-role">Cards, modais, painéis</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1E2A42;border-top:1px solid #2a3a58"></div><div class="swatch-info"><div class="swatch-name">Navy Border</div><div class="swatch-hex">#1E2A42</div><div class="swatch-role">Bordas, divisores, inputs</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F0F4FF"></div><div class="swatch-info"><div class="swatch-name">White Primary</div><div class="swatch-hex">#F0F4FF</div><div class="swatch-role">Texto principal</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8A9BBF"></div><div class="swatch-info"><div class="swatch-name">White Muted</div><div class="swatch-hex">#8A9BBF</div><div class="swatch-role">Texto secundário, descrições</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3A4B6B;border-top:1px solid #1E2A42"></div><div class="swatch-info"><div class="swatch-name">White Faint</div><div class="swatch-hex">#3A4B6B</div><div class="swatch-role">Placeholders, texto terciário</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#EF4444"></div><div class="swatch-info"><div class="swatch-name">Red Error</div><div class="swatch-hex">#EF4444</div><div class="swatch-role">Erros, status negativo</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3B82F6"></div><div class="swatch-info"><div class="swatch-name">Blue Info</div><div class="swatch-hex">#3B82F6</div><div class="swatch-role">Informativo, links neutros</div></div></div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- 03 TIPOGRAFIA -->
+<div class="section">
+  <div class="section-label">03 — Tipografia</div>
+  <div class="section-title">Fontes da Marca</div>
+  <div class="section-desc">Duas fontes apenas. Nunca misture com outras famílias tipográficas.</div>
+  <div class="font-cards" style="margin-bottom:var(--space-8)">
+    <div class="font-card">
+      <div class="font-name">Display & Body — Space Grotesk</div>
+      <div class="font-preview-display">JuriAlvo</div>
+      <div style="font-size:1rem;color:var(--ja-white-muted);margin-top:8px;line-height:1.6">Inteligência processual para localização de ativos e pessoas.</div>
+      <div class="font-weights">
+        <span class="weight-chip" style="font-weight:300">300 Light</span>
+        <span class="weight-chip" style="font-weight:400">400 Regular</span>
+        <span class="weight-chip" style="font-weight:500">500 Medium</span>
+        <span class="weight-chip" style="font-weight:600">600 SemiBold</span>
+        <span class="weight-chip" style="font-weight:700">700 Bold</span>
+      </div>
+      <div class="font-use">Usar em: títulos, subtítulos, corpo de texto, botões, labels de UI</div>
+    </div>
+    <div class="font-card">
+      <div class="font-name">Dados & Código — Space Mono</div>
+      <div class="font-preview-mono">98.2% 14ms</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.85rem;color:var(--ja-teal);margin-top:8px;line-height:1.6">LAT: -23.5505, LON: -46.6333</div>
+      <div class="font-weights">
+        <span class="weight-chip" style="font-family:'Space Mono',monospace">400 Regular</span>
+        <span class="weight-chip" style="font-family:'Space Mono',monospace;font-weight:700">700 Bold</span>
+      </div>
+      <div class="font-use">Usar em: dados numéricos, coordenadas, status técnicos, código, badges de versão</div>
+    </div>
+  </div>
+  <div class="type-specimen">
+    <div class="type-row"><div class="type-meta"><strong>Display</strong>Space Grotesk 700<br>clamp(2.5rem→4rem)</div><div class="t-display">Recupere Ativos</div></div>
+    <div class="type-row"><div class="type-meta"><strong>H1 / Title</strong>Space Grotesk 700<br>clamp(1.8rem→2.8rem)</div><div class="t-h1">Inteligência Processual</div></div>
+    <div class="type-row"><div class="type-meta"><strong>H2 / Section</strong>Space Grotesk 600<br>clamp(1.3rem→1.8rem)</div><div class="t-h2">Fluxo de Localização</div></div>
+    <div class="type-row"><div class="type-meta"><strong>H3 / Card</strong>Space Grotesk 600<br>1.1rem</div><div class="t-h3">Patrimônio Localizado com Precisão</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Body</strong>Space Grotesk 400<br>1rem (16px)</div><div class="t-body">Transformamos interação digital em prova de localização. Nossa tecnologia captura IP, fingerprint e GPS com precisão cirúrgica para acelerar a execução judicial.</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Label / Tag</strong>Space Mono 400<br>.78rem uppercase</div><div class="t-label">RASTREAMENTO_ATIVO_v6.0</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Data / Code</strong>Space Mono<br>.9rem</div><div class="t-mono">LAT: -23.5505 · LON: -46.6333 · 98.2%</div></div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- 04 COMPONENTES -->
+<div class="section">
+  <div class="section-label">04 — Componentes</div>
+  <div class="section-title">UI Components</div>
+  <div class="section-desc">Referência visual dos componentes principais para usar no Claude Code.</div>
+  <div class="components-grid">
+    <div class="component-demo">
+      <div class="component-demo-title">Botões</div>
+      <div class="btn-row"><button class="btn btn-primary">Começar Agora</button><button class="btn btn-secondary">Ver Demonstração</button><button class="btn btn-ghost">Saiba Mais</button></div>
+      <div class="btn-row" style="margin-top:12px"><button class="btn btn-amber">🔥 Garantir Promoção</button></div>
+    </div>
+    <div class="component-demo">
+      <div class="component-demo-title">Badges / Status</div>
+      <div class="badge-row">
+        <span class="badge badge-active">Localizado</span>
+        <span class="badge badge-warning">Em Rastreamento</span>
+        <span class="badge badge-error">Não Encontrado</span>
+        <span class="badge badge-info">Processando</span>
+        <span class="badge badge-neutral">Arquivado</span>
+      </div>
+    </div>
+    <div class="component-demo">
+      <div class="component-demo-title">Cards de Métricas</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="stat-card"><div class="stat-label">Alvos Identificados</div><div class="stat-value">1,284</div><div class="stat-delta">↑ +12% este mês</div></div>
+        <div class="stat-card"><div class="stat-label">Taxa de Sucesso</div><div class="stat-value">98.2%</div><div class="stat-delta">↑ Alta confiabilidade</div></div>
+      </div>
+    </div>
+    <div class="component-demo">
+      <div class="component-demo-title">Formulário</div>
+      <div class="form-group"><label class="form-label">Placa do Veículo</label><input class="form-input" type="text" placeholder="ABC-1234"></div>
+      <div class="form-group" style="margin-top:12px"><label class="form-label">CPF / CNPJ do Devedor</label><input class="form-input" type="text" placeholder="000.000.000-00"></div>
+    </div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- 05 PROMPT -->
+<div class="section">
+  <div class="section-label">05 — Prompt para Claude Code</div>
+  <div class="section-title">Como usar esta identidade</div>
+  <div class="section-desc">Cole este prompt no Claude Code para aplicar a identidade visual JuriAlvo no seu projeto.</div>
+  <div class="code-block"><pre><span class="c-com">// Prompt pronto para Claude Code — copie e cole</span>
+
+<span class="c-str">"Help me improve the design using the frontend-design skill.
+
+BRAND: JuriAlvo — Legal Tech SaaS, busca e apreensão de veículos
+
+FONTS:
+  Títulos/Display: Space Grotesk (700, 600)
+  Corpo/UI:        Space Grotesk (400, 500)
+  Dados/Status:    Space Mono (400, 700)
+  CDN: https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap
+
+COLORS:
+  Primary (teal):  #00C6A2  hover: #00957A
+  Amber (urgência):#F59E0B
+  BG principal:    #0A0E1A
+  Surface:         #111827
+  Card:            #161D2E
+  Border:          #1E2A42
+  Text primary:    #F0F4FF
+  Text muted:      #8A9BBF
+  Text faint:      #3A4B6B
+  Error:           #EF4444
+  Info:            #3B82F6
+
+CONCEPT: Intelligence platform, dark tech, precision targeting.
+Military-grade accuracy aesthetic. Crosshair/target motif.
+Dense data UI with monospaced metrics and coordinate readouts.
+
+TONE: Authoritative, precise, urgent. B2B legal/financial.
+NOT: Consumer app, colorful, playful, gradient purple."</span></pre></div>
+</div>
+<hr class="divider">
+
+<!-- 06 REGRAS -->
+<div class="section">
+  <div class="section-label">06 — Diretrizes</div>
+  <div class="section-title">O que Fazer e Evitar</div>
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <h4><span class="icon icon-do">✓</span> Fazer</h4>
+      <ul>
+        <li>Usar fundo navy escuro (#0A0E1A) como base</li>
+        <li>Teal apenas para CTAs primários e destaques</li>
+        <li>Amber para urgência, alertas e ROI</li>
+        <li>Space Mono para dados numéricos e coordenadas</li>
+        <li>Manter hierarquia: título branco, body em muted</li>
+        <li>Bordas sutis com opacidade (#1E2A42)</li>
+        <li>Badges com fundo semi-transparente da cor do status</li>
+      </ul>
+    </div>
+    <div class="rule-card dont">
+      <h4><span class="icon icon-dont">✕</span> Evitar</h4>
+      <ul>
+        <li>Gradientes roxos/azuis (aparência genérica de AI)</li>
+        <li>Ícones dentro de círculos coloridos cheios</li>
+        <li>Fundo branco ou claro na versão principal dark</li>
+        <li>Mais de 2 cores de destaque por tela</li>
+        <li>Bordas laterais coloridas em cards</li>
+        <li>Texto menor que 12px em qualquer contexto</li>
+        <li>Misturar outras famílias tipográficas</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- 07 DOWNLOADS -->
+<div class="section">
+  <div class="section-label">07 — Assets</div>
+  <div class="section-title">Baixar Arquivos</div>
+  <div class="section-desc">Clique nos botões abaixo para baixar cada asset da marca.</div>
+  <div class="download-grid">
+    <div class="dl-card"><div class="dl-card-icon">🎯</div><div class="dl-card-name">Logo Dark (SVG)</div><div class="dl-card-desc">Versão para fundos escuros. JURI branco + ALVO teal.</div><button class="dl-btn" onclick="downloadSVG('dark')">⬇ Baixar Logo Dark</button></div>
+    <div class="dl-card"><div class="dl-card-icon">☀️</div><div class="dl-card-name">Logo Light (SVG)</div><div class="dl-card-desc">Versão para fundos claros. JURI navy + ALVO teal escuro.</div><button class="dl-btn" onclick="downloadSVG('light')">⬇ Baixar Logo Light</button></div>
+    <div class="dl-card"><div class="dl-card-icon">⊕</div><div class="dl-card-name">Ícone / Favicon (SVG)</div><div class="dl-card-desc">Ícone de mira para avatar, favicon e app icon.</div><button class="dl-btn" onclick="downloadSVG('icon')">⬇ Baixar Ícone</button></div>
+    <div class="dl-card"><div class="dl-card-icon">🟢</div><div class="dl-card-name">Logo Mono (SVG)</div><div class="dl-card-desc">Versão branca para fundos coloridos (teal, foto).</div><button class="dl-btn" onclick="downloadSVG('mono')">⬇ Baixar Mono</button></div>
+    <div class="dl-card"><div class="dl-card-icon">🎨</div><div class="dl-card-name">CSS Tokens</div><div class="dl-card-desc">Variáveis CSS prontas para copiar no seu projeto.</div><button class="dl-btn" onclick="downloadCSS()">⬇ Baixar CSS</button></div>
+    <div class="dl-card"><div class="dl-card-icon">📋</div><div class="dl-card-name">design.json</div><div class="dl-card-desc">Todos os tokens da marca em formato JSON.</div><button class="dl-btn" onclick="downloadJSON()">⬇ Baixar JSON</button></div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:var(--space-8) 0;border-top:1px solid var(--ja-navy-border)">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height="28" style="margin:0 auto var(--space-3)" aria-label="JuriAlvo icon">
+    <circle cx="24" cy="24" r="22" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.3"/>
+    <circle cx="24" cy="24" r="14" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="24" cy="24" r="5" fill="#00C6A2"/>
+    <line x1="24" y1="1" x2="24" y2="10" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+    <line x1="24" y1="38" x2="24" y2="47" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+    <line x1="1" y1="24" x2="10" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+    <line x1="38" y1="24" x2="47" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/>
+  </svg>
+  <p style="font-family:var(--font-mono);font-size:11px;color:var(--ja-white-faint);letter-spacing:.1em">JURIALVO™ · BRAND IDENTITY KIT V1.0 · 2026</p>
+</div>
+</div>
+
+<script>
+function downloadSVG(t){
+  let s='',f='';
+  if(t==='dark'){f='jurialvo-logo-dark.svg';s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.35"/><circle cx="24" cy="24" r="12" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.65"/><circle cx="24" cy="24" r="4.5" fill="#00C6A2"/><line x1="24" y1="2" x2="24" y2="11" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/><line x1="24" y1="37" x2="24" y2="46" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/><line x1="2" y1="24" x2="11" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/><line x1="37" y1="24" x2="46" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.55"/><text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#F0F4FF" letter-spacing="-0.8">JURI</text><text x="118" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#00C6A2" letter-spacing="-0.8">ALVO</text><text x="178" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="#8A9BBF">TM</text></svg>`;}
+  else if(t==='light'){f='jurialvo-logo-light.svg';s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="#00957A" stroke-width="1.5" opacity="0.35"/><circle cx="24" cy="24" r="12" fill="none" stroke="#00957A" stroke-width="1.5" opacity="0.65"/><circle cx="24" cy="24" r="4.5" fill="#00957A"/><line x1="24" y1="2" x2="24" y2="11" stroke="#00957A" stroke-width="1.5" opacity="0.55"/><line x1="24" y1="37" x2="24" y2="46" stroke="#00957A" stroke-width="1.5" opacity="0.55"/><line x1="2" y1="24" x2="11" y2="24" stroke="#00957A" stroke-width="1.5" opacity="0.55"/><line x1="37" y1="24" x2="46" y2="24" stroke="#00957A" stroke-width="1.5" opacity="0.55"/><text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#0A0E1A" letter-spacing="-0.8">JURI</text><text x="118" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#00957A" letter-spacing="-0.8">ALVO</text><text x="178" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="#6B7B9A">TM</text></svg>`;}
+  else if(t==='icon'){f='jurialvo-icon.svg';s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="22" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.3"/><circle cx="24" cy="24" r="14" fill="none" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/><circle cx="24" cy="24" r="5" fill="#00C6A2"/><line x1="24" y1="1" x2="24" y2="10" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/><line x1="24" y1="38" x2="24" y2="47" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/><line x1="1" y1="24" x2="10" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/><line x1="38" y1="24" x2="47" y2="24" stroke="#00C6A2" stroke-width="1.5" opacity="0.6"/></svg>`;}
+  else{f='jurialvo-logo-mono.svg';s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/><circle cx="24" cy="24" r="12" fill="none" stroke="white" stroke-width="1.5" opacity="0.7"/><circle cx="24" cy="24" r="4.5" fill="white"/><line x1="24" y1="2" x2="24" y2="11" stroke="white" stroke-width="1.5" opacity="0.6"/><line x1="24" y1="37" x2="24" y2="46" stroke="white" stroke-width="1.5" opacity="0.6"/><line x1="2" y1="24" x2="11" y2="24" stroke="white" stroke-width="1.5" opacity="0.6"/><line x1="37" y1="24" x2="46" y2="24" stroke="white" stroke-width="1.5" opacity="0.6"/><text x="58" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="white" letter-spacing="-0.8">JURIALVO</text><text x="196" y="18" font-family="Space Grotesk,sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">TM</text></svg>`;}
+  const b=new Blob([s],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f;a.click();
+}
+function downloadCSS(){
+  const css=`/* JURIALVO CSS DESIGN TOKENS V1.0 */\n:root {\n  --ja-teal: #00C6A2;\n  --ja-teal-hover: #00957A;\n  --ja-teal-glow: rgba(0,198,162,0.15);\n  --ja-amber: #F59E0B;\n  --ja-amber-hover: #D97706;\n  --ja-bg: #0A0E1A;\n  --ja-surface: #111827;\n  --ja-card: #161D2E;\n  --ja-border: #1E2A42;\n  --ja-text: #F0F4FF;\n  --ja-text-muted: #8A9BBF;\n  --ja-text-faint: #3A4B6B;\n  --ja-error: #EF4444;\n  --ja-info: #3B82F6;\n  --font-display: 'Space Grotesk', sans-serif;\n  --font-mono: 'Space Mono', monospace;\n}`;
+  const b=new Blob([css],{type:'text/css'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='jurialvo-tokens.css';a.click();
+}
+function downloadJSON(){
+  const j={brand:"JuriAlvo",version:"1.0",year:2026,colors:{primary:{teal:"#00C6A2",tealHover:"#00957A"},accent:{amber:"#F59E0B"},surfaces:{bg:"#0A0E1A",surface:"#111827",card:"#161D2E",border:"#1E2A42"},text:{primary:"#F0F4FF",muted:"#8A9BBF",faint:"#3A4B6B"},status:{error:"#EF4444",info:"#3B82F6"}},typography:{display:{family:"Space Grotesk",weights:[300,400,500,600,700]},mono:{family:"Space Mono",weights:[400,700]},cdn:"https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap"},concept:"Intelligence platform, dark tech, precision targeting.",tone:"Authoritative, precise, urgent. B2B legal/financial."};
+  const b=new Blob([JSON.stringify(j,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='jurialvo-design.json';a.click();
+}
+</script>
+</body>
+</html>

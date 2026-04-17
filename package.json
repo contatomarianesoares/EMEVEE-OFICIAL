@@ -1,0 +1,6 @@
+{
+  "name": "emevee-z-workspace",
+  "scripts": {
+    "crm": "npm --prefix ../JURIALVO-CRM run dev -- --port 5175"
+  }
+}
