@@ -5,3 +5,4 @@ build/
 *.log
 .DS_Store
 .vercel
+test: force rebuild with latest API routes
