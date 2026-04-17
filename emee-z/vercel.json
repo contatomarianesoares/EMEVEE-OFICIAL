@@ -1,7 +1,7 @@
 {
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
-  "public": "frontend/public",
+  "cleanUrls": true,
   "env": {
     "DATABASE_URL": "@DATABASE_URL",
     "JWT_SECRET": "@JWT_SECRET",
@@ -10,7 +10,15 @@
   },
   "functions": {
     "frontend/api/**/*.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs20.x",
+      "memory": 1024,
+      "maxDuration": 60
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/(?<path>.*)",
+      "dest": "frontend/api/$path"
+    }
+  ]
 }
