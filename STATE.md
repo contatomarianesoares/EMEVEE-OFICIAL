@@ -1,19 +1,22 @@
-# EMEE-Z — STATE.md (Handover para próxima IA)
+# EMEVEE OFICIAL — STATE.md (Handover para próxima IA)
 
-**Última atualização**: 16/04/2026 — Claude Sonnet 4.6
-**Status geral**: ✅ SISTEMA FUNCIONANDO EM PRODUÇÃO | ⚠️ SUPABASE APONTANDO PARA BANCO ERRADO (ver seção crítica)
+**Última atualização**: 17/04/2026 — Claude Opus 4.7
+**Status geral**: 🚀 MIGRAÇÃO PARA CLOUD | ✅ Schema criado no Supabase | ⏳ Render backend pendente
 
 ---
 
-## 🚨 PROBLEMA CRÍTICO — LEIA PRIMEIRO
+## 🚀 MIGRAÇÃO CLOUD — 17/04/2026
 
-O arquivo `emee-z/frontend/.env.local` aponta para o projeto Supabase `locdev` (`uvvmooztkolmkckmwjwz`), que é o **banco de produção do JuriAlvo** (outro sistema da mesma dona, com clientes reais). Isso é ERRADO.
+**O que foi feito hoje:**
+1. ✅ Criado schema no Supabase `EMEVEE-Z` (dysnlzaqnwpmmbqundqd) — tabelas de backend prontas
+2. ✅ Frontend no Vercel em `jurialvo-crm-new.vercel.app` com env vars Supabase
+3. ✅ Usuário de teste criado: `contatomarianesoares@gmail.com` / `Teste123!`
+4. ✅ `render.yaml` e guias de setup criados
+5. ⏳ **PRÓXIMO**: Deploy backend no Render (aguarda ação manual no dashboard Render)
 
-**O que precisa ser feito:**
-1. Criar novo projeto Supabase chamado `jurialvo-suite` — compartilhado com JURIALVO-CRM
-2. Aplicar as migrations das tabelas de integração no novo projeto (ver seção banco abaixo)
-3. Atualizar `emee-z/frontend/.env.local` com URL e anon key do novo projeto
-4. Fazer novo build local e deploy no servidor Oracle (ver seção deploy)
+**Mudança de projeto:**
+- Repositório GitHub: `contatomarianesoares/EMEVEE-OFICIAL` (token atualizado)
+- Status: local commit feito, aguarda push para GitHub
 
 **Tabelas que este projeto escreve/lê no Supabase:**
 - `conversas_wpp` — sincronização de conversas com CRM (escrita pelo EMEVEE-Z)
