@@ -9,6 +9,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret';
 
 // Handlers embutidos por rota
 const handlers = {
+  // Seed (dev only)
+  'POST /seed/usuario': seedUsuarioHandler,
+
+  // Auth
   'POST /auth/login': loginHandler,
   'POST /auth/logout': logoutHandler,
   'GET /auth/me': meHandler,
@@ -30,6 +34,39 @@ const handlers = {
   'POST /webhooks': webhooksHandler,
   'POST /bot': botHandler,
 };
+
+// ============ SEED (DEV ONLY) ============
+async function seedUsuarioHandler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ erro: 'Método não permitido' });
+  try {
+    const { email, senha, nome, papel } = req.body;
+    if (!email || !senha || !nome || !papel) {
+      return res.status(400).json({ erro: 'email, senha, nome, papel obrigatórios' });
+    }
+    if (!['gestora', 'agente'].includes(papel)) {
+      return res.status(400).json({ erro: 'papel deve ser gestora ou agente' });
+    }
+
+    const senhaHash = await bcrypt.hash(senha, 10);
+    const id = uuidv4();
+
+    await query(
+      'INSERT INTO usuarios (id, email, nome, senha_hash, papel, ativo) VALUES ($1, $2, $3, $4, $5, $6)',
+      [id, email.toLowerCase().trim(), nome, senhaHash, papel, true]
+    );
+
+    return res.status(201).json({
+      mensagem: 'Usuário criado com sucesso',
+      usuario: { id, email, nome, papel }
+    });
+  } catch (err) {
+    console.error('[API] Erro seed:', err.message);
+    if (err.message.includes('duplicate key')) {
+      return res.status(409).json({ erro: 'Email já existe' });
+    }
+    return res.status(500).json({ erro: 'Erro ao criar usuário', debug: err.message });
+  }
+}
 
 // ============ AUTH ============
 async function loginHandler(req, res) {
