@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd emee-z/frontend && npm install && npm run build",
+  "outputDirectory": "emee-z/frontend/dist",
+  "installCommand": "cd emee-z/frontend && npm install",
+  "functions": {
+    "emee-z/frontend/api/index.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/((?!api|assets|favicon|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
